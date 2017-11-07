@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdint>
 #include <fstream>
+#include <stdexcept>
 
 using namespace std;
 
@@ -47,7 +48,7 @@ class GrayImage {
 
 		void clear(uint8_t color=00);
 		void rectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color);
-		//void fillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color);
+		void fillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color);
 
 
 

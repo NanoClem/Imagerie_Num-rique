@@ -24,8 +24,9 @@ int main()
 
 
   erase -> GrayImage::clear();
-  erase -> GrayImage::rectangle(5, 2, erase -> getWidth(), erase -> getHeight(), 255);
-  ofstream vide("vide.pgm", ios::binary);
+  erase -> GrayImage::rectangle(100, 50, erase -> getWidth(), erase -> getHeight(), 255);
+  //erase -> GrayImage::fillRectangle(10, 5, erase -> getWidth(), erase -> getHeight(), 255);
+  ofstream vide("rectangle.pgm", ios::binary);
     erase -> GrayImage::writePGM(vide);
 
     //préciser les couleurs
