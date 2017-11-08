@@ -71,6 +71,7 @@ void skip_comments(istream& is)
 		skip_line(is);
 		is.get(c);
 	}
+
 	is.putback(c);
 }
 
@@ -112,35 +113,34 @@ GrayImage * GrayImage::readPGM(istream& is)
 
 void GrayImage::rectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color)
 {
-	for(size_t i = 0; i < size_t(w); ++i)
-			pixel(w-i, y) = color;
-
-	//for(size_t i = 0; i < size_t(w); ++i)
-		//pixel(x, y) = color;
-
-	for(size_t i = 0; i < size_t(h); ++i)
+	for(uint16_t _x = x; _x < w; ++_x)
 	{
-		pixel(x, y+i) = color;
-		pixel(w-x, y+i) = color;
+		pixel(_x, y) = color;
+		pixel(_x, h) = color;
 	}
-
-	//for(size_t i = 0; i < size_t(h); ++i)
-		//
-
+	
+	for(uint16_t _y = y; _y < h; ++_y)
+	{
+		pixel(x, _y) = color;
+		pixel(w, _y) = color;
+	}
 }
 
 
 
-/*void GrayImage::fillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color)
+void GrayImage::fillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color)
 {
-	for(size_t i = size_t(w); i = 0  ; --i)
-			rectangle(x, y, x, h, color);
-}*/
+	for(size_t _x = x; _x < size_t(w); ++_x)
+		for(size_t _y = y; _y < size_t(h); ++_y)
+			pixel(_x, _y) = color;
+}
+
+
 
 
 
 void GrayImage::clear(uint8_t color)
 {
-	for(size_t i=0; i<uint32_t(getWidth() * getHeight()); ++i)
+	for(size_t i=0; i<size_t(getWidth() * getHeight()); ++i)
 		array[i] = color;
 }
