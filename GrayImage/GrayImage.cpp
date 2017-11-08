@@ -111,32 +111,6 @@ GrayImage * GrayImage::readPGM(istream& is)
 
 
 
-void GrayImage::rectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color)
-{
-	for(uint16_t _x = x; _x < w; ++_x)
-	{
-		pixel(_x, y) = color;
-		pixel(_x, h) = color;
-	}
-	
-	for(uint16_t _y = y; _y < h; ++_y)
-	{
-		pixel(x, _y) = color;
-		pixel(w, _y) = color;
-	}
-}
-
-
-
-void GrayImage::fillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color)
-{
-	for(size_t _x = x; _x < size_t(w); ++_x)
-		for(size_t _y = y; _y < size_t(h); ++_y)
-			pixel(_x, _y) = color;
-}
-
-
-
 
 
 void GrayImage::clear(uint8_t color)
@@ -144,3 +118,55 @@ void GrayImage::clear(uint8_t color)
 	for(size_t i=0; i<size_t(getWidth() * getHeight()); ++i)
 		array[i] = color;
 }
+
+
+
+
+
+void GrayImage::rectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color)
+{
+	if(w >= getWidth() || h >= getHeight())
+		cerr << "RECTANGLE(), dimensions invalides \n";
+	
+	else if( (x <= 0) && (y <= 0) )
+		cerr << "RECTANGLE(), les coordonnées de depart n'existent pas dans l'image \n";
+	
+	else
+	{
+		for(uint16_t _x = x; _x < w; ++_x)
+		{
+			pixel(_x, y) = color;
+			pixel(_x, h) = color;
+		}
+		
+		for(uint16_t _y = y; _y < h; ++_y)
+		{
+			pixel(x, _y) = color;
+			pixel(w, _y) = color;
+		}
+	}
+}
+
+
+
+void GrayImage::fillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color)
+{
+	if(w >= getWidth() || h >= getHeight())
+		cerr << "FILLRRECTANGLE(), dimensions invalides \n";
+	
+	else if( (x <= 0) && (y <= 0) )
+		cerr << "FILLRRECTANGLE(), les coordonnées de depart n'existent pas dans l'image \n";
+
+	else
+	{
+		for(size_t _x = x; _x < size_t(w); ++_x)
+			for(size_t _y = y; _y < size_t(h); ++_y)
+				pixel(_x, _y) = color;
+	}
+}
+
+
+
+
+
+

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cstdint>
 #include <fstream>
+#include <stdexcept>
 
 using namespace std;
 
