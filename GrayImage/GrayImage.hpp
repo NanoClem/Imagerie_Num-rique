@@ -31,6 +31,9 @@ class GrayImage {
 
 		static GrayImage * readPGM(istream& is);
 		void writePGM(ostream& os) const;
+		GrayImage * simpleScale(uint16_t w, uint16_t h) const;
+		GrayImage * bilinearScale(uint16_t w, uint16_t h) const;
+
 
 
 		//Getters et Setters
@@ -45,16 +48,13 @@ class GrayImage {
 		GrayImage& operator =(const GrayImage& b) = delete;
 
 
-
 		void clear(uint8_t color=00);
 		void rectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color);
 		void fillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t color);
 
 
-
 		friend void skip_line(istream& is);
 		friend void skip_comment(istream& is);
-
 };
 
 #endif
