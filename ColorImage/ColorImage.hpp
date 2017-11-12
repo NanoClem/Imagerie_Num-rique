@@ -50,6 +50,7 @@ class ColorImage {
     static ColorImage * readPPM(istream& is);
     void writePPM(ostream& os) const;
     ColorImage * simpleScale(uint16_t w, uint16_t h) const;
+		ColorImage * bilinearScale(uint16_t w, uint16_t h) const;
 
 		friend void skip_line(istream& is);
 		friend void skip_comment(istream& is);

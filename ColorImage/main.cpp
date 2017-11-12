@@ -49,48 +49,66 @@ int main()
     // delete [] Endianess;
 
   Color color(0,120,255);   //nouvelle couleur de pixel
-  uint16_t w = 823;
+  uint16_t w = 823;         //nouvelle longueur pour le réchantillonage
   uint16_t h = 400;
+  uint16_t temp_x = 50;     //variable temp pour la consultation de couleur d'un pixel de l'image
+  uint16_t temp_y = 20;
 
-//LECTURE DE L'IMAGE DE BASE
-  ifstream chat("chat.ppm", ios::binary);
-    ColorImage * chat1 = ColorImage::readPPM(chat);
+
+//LECTURE DE L'IMAGE DE BASE : chat.ppm
+  ifstream cat("chat.ppm", ios::binary);
+    ColorImage * cat1 = ColorImage::readPPM(cat);
 
 //MODIFICATIONS DE L'IMAGE : dessins de rectangles
-  chat1 -> ColorImage::fillRectangle(35, 65, 150, 200, color);
-  chat1 -> ColorImage::rectangle(165, 65, 290, 200, color);
+  cat1 -> ColorImage::fillRectangle(35, 65, 150, 200, color);
+  cat1 -> ColorImage::rectangle(165, 65, 290, 200, color);
 
-//ECRITURE DE L'IMAGE MODIFIÉE N°1
-  ofstream chat_modif("chat_modif.ppm", ios::binary);
-    chat1 -> ColorImage::writePPM(chat_modif);
+//ECRITURE DE L'IMAGE MODIFIÉE N°1 : squared_head_cat.ppm
+  ofstream squared_cat("squared_head_cat.ppm", ios::binary);
+    cat1 -> ColorImage::writePPM(squared_cat);
 
 
-//LECTURE D'UNE NOUVELLE IMAGE DE BASE
-  ifstream chat_petit("chat_petit.ppm", ios::binary);
-    ColorImage * chat2 = ColorImage::readPPM(chat_petit);
 
-//MODIFICATIONS DE LA NOUVELLE IMAGE : réchantillonage simpliste (823x400)
-  chat2 -> ColorImage::simpleScale(w, h);
+//LECTURE D'UNE NOUVELLE IMAGE DE BASE : chat_petit.ppm
+  ifstream little_cat("chat_petit.ppm", ios::binary);
+    ColorImage * cat2 = ColorImage::readPPM(little_cat);
 
-//ECRITURE DE L'IMAGE MODIFIÉE N°2
-  ofstream chat_grand_simple("chat_grand_simple.ppm", ios::binary);
-    chat2 -> ColorImage::writePPM(chat_grand_simple);
+//MODIFICATIONS DE L'IMAGE chat_petit.ppm : réchantillonage simpliste (823x400)
+  ColorImage * simple_cat = cat2 -> ColorImage::simpleScale(w, h);
+  //cat2 = cat2 -> ColorImage::simpleScale(w, h);  //On pert l'image pointée par cat2 à la base
+
+//ECRITURE DE L'IMAGE MODIFIÉE : big_jammed_cat.ppm
+  ofstream big_simple_cat("big_jammed_cat.ppm", ios::binary);
+    simple_cat -> ColorImage::writePPM(big_simple_cat);
+    //cat2 -> ColorImage::writePPM(big_simple_cat);
+
+
+
+//MODIFICATIONS DE L'IMAGE chat_petit.ppm  : réchantillonage bilinéaire (823x400)
+  ColorImage * bilinear_cat = cat2 -> ColorImage::bilinearScale(w, h);
+
+//ECRITURE DE L'IMAGE MODIFIÉE : big_blurred_cat.ppm
+  ofstream big_bilinear_cat("big_blurred_cat.ppm", ios::binary);
+    bilinear_cat -> ColorImage::writePPM(big_bilinear_cat);
+    //cat2 -> ColorImage::writePPM(big_bilinear_cat);
+
+
+
+//REMPLISSAGE OU "VIDAGE" DE L'IMAGE DE BASE
+  ifstream basic_cat("chat.ppm", ios::binary);
+    ColorImage * erase = ColorImage::readPPM(basic_cat);
+  erase -> ColorImage::clear(color);
+
+//ECRITURE DE L'IMAGE REMPLIE OU VIDÉE
+  ofstream vide("cat_vide.ppm", ios::binary);
+    erase -> ColorImage::writePPM(vide);
+
 
 
 //AFFICHER LES VALEURS PRISES PAR CHACUN DES 3 OCTETS D'UN PIXEL DONNÉ
-   Color temp = chat1 -> pixel(50,20);
-   cout << "Color used : " << temp << endl;
+   Color temp = cat1 -> pixel(temp_x, temp_y);
+   cout << "Color used for chat.ppm at " << "(" << temp_x << ", " << temp_y <<") : " << temp << endl;
 
-
-
-  //REMPLISSAGE OU "VIDAGE" DE L'IMAGE DE BASE
-  ifstream chat_base("chat.ppm", ios::binary);
-    ColorImage * erase = ColorImage::readPPM(chat_base);
-  erase -> ColorImage::clear(color);
-
-  //ECRITURE DE L'IMAGE REMPLIE OU VIDÉE
-  ofstream vide("chat_vide.ppm", ios::binary);
-    erase -> ColorImage::writePPM(vide);
 
   return 0;
 }
