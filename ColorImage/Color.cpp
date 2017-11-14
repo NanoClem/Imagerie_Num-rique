@@ -14,9 +14,9 @@ Color operator +(const Color& c1, const Color& c2)
 
 Color operator *(double alpha, const Color& color)
 {
-  uint8_t _r = uint8_t(alpha) * color.r;
-  uint8_t _g = uint8_t(alpha) * color.g;
-  uint8_t _b = uint8_t(alpha) * color.b;
+  uint8_t _r = alpha * color.r;
+  uint8_t _g = alpha * color.g;
+  uint8_t _b = alpha * color.b;
 
   return Color(_r, _g, _b);
 }

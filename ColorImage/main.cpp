@@ -10,7 +10,7 @@ using namespace std;
 
 
 //SAVOIR SI ON EST EN BIG-ENDIAN OU LITLE-ENDIAN
-bool * BigOrLitle()
+bool * BigOrLitle()   //Fonction bool si l'on veut faire une action en fonction du retour
 {
   bool * isEndian = new bool();
   uint16_t toto = 0x00FF;
@@ -19,14 +19,14 @@ bool * BigOrLitle()
   if(*ptr == 0xFF)
   {
     cout << "LITLE-ENDIAN \n";
-    *isEndian = true;
+    (*isEndian) = true;
     return isEndian;
   }
 
   if(*ptr == 0x00)
   {
     cout << "BIG-ENDIAN \n";
-    *isEndian = false;
+    (*isEndian) = false;
     return isEndian;
   }
 

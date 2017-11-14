@@ -197,19 +197,20 @@ ColorImage * ColorImage::bilinearScale(uint16_t w, uint16_t h) const
 	for(uint16_t _y = 0; _y < h; ++_y)
 		for(uint16_t _x = 0; _x < w; ++_x)
 		{
-			double x = double(_x * getWidth()) / w;
+			double x = double(_x * getWidth())  / w;
 			double y = double(_y * getHeight()) / h;
 
 			uint16_t xi = uint16_t(x);
 			uint16_t yi = uint16_t(y);
 
-			uint16_t x2 = (xi+1 < getWidth() ? xi+1 : xi);		//Si xi+1 < width on prend xi+1 sinon xi
+			uint16_t x2 = (xi+1 < getWidth()  ? xi+1 : xi);		//Si xi+1 < width on prend xi+1 sinon xi
 			uint16_t y2 = (yi+1 < getHeight() ? yi+1 : yi);		//Au cas où on dépasse les dimensions de l'image
 
 			double lambda = x-xi;
-			double mu = y-yi;
+			double mu     = y-yi;
 
-			picture -> pixel(_x, _y) = (1-lambda) * ((1-mu)*pixel(xi,yi) + mu*pixel(xi,y2)) + lambda * ((1-mu)*pixel(x2,yi) + mu*pixel(x2,y2));
+			picture -> pixel(_x, _y) = (1-lambda) * ((1-mu)*pixel(xi,yi) + mu*pixel(xi,y2))
+				                       +     lambda * ((1-mu)*pixel(x2,yi) + mu*pixel(x2,y2));
 		}
 
 	return picture;
