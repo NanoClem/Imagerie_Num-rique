@@ -21,29 +21,11 @@ ColorImage::~ColorImage()
 //Construct Copie
 ColorImage::ColorImage(const ColorImage& src)
 	:width(src.width), height(src.height), array(nullptr)
+{
+	array = new Color [src.width*src.height];
 
-{ 	array = new Color [src.width*src.height];
-
-  	for(size_t t=0; t < size_t(src.width*src.height); t++)
-		  array[t] = src.array[t];
-}
-
-
-
-
-
-void ColorImage::writePPM(ostream& os) const {
-
-	os << "P6\n"
-	   << "#image sauvee par D.Clement\n"
-	   << width << " " << height << "\n"
-	   <<  "#GPALU\n"
-	   << "255\n";
-
-	//for(size_t i=0; i<size_t(width*height); i++)
-		//os.put(array[i]);
-
-	os.write((const char *)array, width*height*3);  //La couleur est sur 3 octets donc 3x plus
+	for(size_t t=0; t < size_t(src.width*src.height); t++)
+	  array[t] = src.array[t];
 }
 
 
@@ -75,6 +57,24 @@ void skip_comments(istream& is)
 
 	is.putback(c);
 }
+
+
+
+
+void ColorImage::writePPM(ostream& os) const {
+
+	os << "P6\n"
+	   << "#image sauvee par D.Clement\n"
+	   << width << " " << height << "\n"
+	   <<  "#GPALU\n"
+	   << "255\n";
+
+	//for(size_t i=0; i<size_t(width*height); i++)
+		//os.put(array[i]);
+
+	os.write((const char *)array, width*height*3);  //La couleur est sur 3 octets donc 3x plus
+}
+
 
 
 
@@ -112,6 +112,25 @@ ColorImage * ColorImage::readPPM(istream& is)
 
 	return picture;
 }
+
+
+
+
+
+// void ColorImage::writeTGA(ostream& os) const
+// {
+// 	os << "0";
+// 	os.write((const char *));
+// }
+//
+//
+//
+//
+//
+// ColorImage * ColorImage::readTGA(istream& is)
+// {
+//
+// }
 
 
 
