@@ -1,5 +1,13 @@
 // Classe Image
 
+
+const char * const identifier   = "decoopman_c";
+
+const char * const informations =
+"METTRE DES COMMENTAIRES \n"
+"correspond aux infos supplémentaires du programme pour le correcteur"
+;
+
 #ifndef Image_HPP
 #define Image_HPP
 

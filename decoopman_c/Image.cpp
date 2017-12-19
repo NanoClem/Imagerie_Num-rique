@@ -3,6 +3,7 @@
 #include "Image.hpp"
 
 
+
 //Constructeur
 Image::Image(uint16_t w, uint16_t h)
 	:width(w), height(h), array(nullptr)
@@ -35,7 +36,7 @@ Image::Image(const Image& src)
 void Image::writePGM(ostream& os) const {
 
 	os << "P5\n"
-	   << "#image sauvee par D.Clement\n"
+	   << "#Image sauvee par D.Clement\n"
 	   << width << " " << height << "\n"
 	   <<  "#GPALU\n"
 	   << "255\n";
@@ -130,7 +131,7 @@ void Image::rectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t co
 		cerr << "RECTANGLE(), dimensions invalides \n";
 
 	else if( (x <= 0) && (y <= 0) )
-		cerr << "RECTANGLE(), les coordonnées de depart n'existent pas dans l'image \n";
+		cerr << "RECTANGLE(), les coordonnées de depart n'existent pas dans l'Image \n";
 
 	else
 	{
@@ -157,7 +158,7 @@ void Image::fillRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_
 		cerr << "FILLRRECTANGLE(), dimensions invalides \n";
 
 	else if( (x <= 0) || (y <= 0) )
-		cerr << "FILLRRECTANGLE(), les coordonnées de depart n'existent pas dans l'image \n";
+		cerr << "FILLRRECTANGLE(), les coordonnées de depart n'existent pas dans l'Image \n";
 
 	else
 	{
@@ -202,7 +203,7 @@ Image * Image::bilinearScale(uint16_t w, uint16_t h) const
 			uint16_t yi = uint16_t(y);
 
 			uint16_t x2 = (xi+1 < getWidth()  ? xi+1 : xi);		//Si xi+1 < width on prend xi+1 sinon xi
-			uint16_t y2 = (yi+1 < getHeight() ? yi+1 : yi);		//Au cas où on dépasse les dimensions de l'image
+			uint16_t y2 = (yi+1 < getHeight() ? yi+1 : yi);		//Au cas où on dépasse les dimensions de l'Image
 
 			double lambda = x-xi;
 			double mu = y-yi;
