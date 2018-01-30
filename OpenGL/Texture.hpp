@@ -1,4 +1,7 @@
 
+#ifndef TEXTURE_HPP
+#define TEXTURE_HPP
+
 class Texture {
 
   private:
@@ -22,3 +25,5 @@ class Texture {
     void define_loop(GLint mode_axe_s, GLint mode_axe_t);
     void define_melting(GLint mode);
 };
+
+#endif

@@ -528,6 +528,9 @@ GLvoid callback_display()
 	// On affiche la scÃ¨ne.
 	affiche_scene();
 
+	//Calcul du temps écoulé entre deux étapes d'animation
+	float dt = mesure_temps_ecoule();
+
 	// On force OpenGL Ã  afficher avant de passer Ã  la suite.
 	glFlush();
 }
