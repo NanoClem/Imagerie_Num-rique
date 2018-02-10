@@ -8,22 +8,19 @@
 // Classe d�finissant un terrain 3D.
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef TERRAIN_H
-#define TERRAIN_H
+#ifndef TERRAIN_HPP
+#define TERRAIN_HPP
 
-
-
-#include <GL/glu.h>
-#include "glut.h"
-#include "vector3f.h"
-
+#ifndef byte
+typedef unsigned char byte;
+#endif
 
 
 typedef struct									// D�finition d'un point du terrain
 {
 	GLfloat	s, t;								// Coordonn�es de texture
 	GLfloat nx, ny, nz;							// Coordonn�es de la normale associ�e � ce point
-	GLfloat	x, hauteur, z;						// Coordonn�es du point
+	GLfloat	x, hauteur, z;						// Coordonn�es du sommet
 } Point_terrain;
 
 
@@ -35,7 +32,7 @@ public :
 	~Terrain();										// Destructeur
 
 	bool creation(	float dx, float dy, float dz,	// Cr�ation du terrain � partir d'une image
-					const char *image_hauteurs );
+									byte *image_hauteurs );
 
 	void affiche();									// Affichage du terrain
 
@@ -56,6 +53,7 @@ private:
 	float   dist_y;									// Coefficient d'agrandissement vertical
 
 	Point_terrain	*points_terrain;				// Tableau contenant les points du terrain
+	GLuint 				*liste_indices;					// Tableau contenant les indices des sommets
 
 	GLfloat terrain_ambient [4];
 	GLfloat terrain_diffuse [4];

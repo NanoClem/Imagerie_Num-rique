@@ -8,9 +8,12 @@
 // Classe d�finissant un terrain 3D.
 ///////////////////////////////////////////////////////////////////////////////
 
+#include <GL/glut.h>
 #include <math.h>
-#include "terrain.hpp"
+#include "vector3f.h"
 #include "pgm.h"
+#include "terrain.hpp"
+
 
 
 
@@ -26,6 +29,7 @@
 Terrain::Terrain()
 {
 	points_terrain = NULL;
+	liste_indices  = NULL;
 }
 
 
@@ -41,9 +45,8 @@ Terrain::Terrain()
 ///////////////////////////////////////////////////////////////////////////////
 Terrain::~Terrain()
 {
-
-
-
+	delete[] points_terrain;
+	delete[] liste_indices;
 }
 
 
@@ -68,8 +71,11 @@ void Terrain::affiche()
 	//         1/--2
 	//
 
+	const unsigned int NB_INDICES = nb_pt_x * nb_pt_z * 2 * 3;
 
-
+	glInterleavedArrays( GL_T2F_N3F_V3F, 0, points_terrain );
+	glDrawElements( GL_TRIANGLES, NB_INDICES,
+	 								GL_UNSIGNED_INT, liste_indices );
 }
 
 
@@ -86,11 +92,11 @@ void Terrain::affiche()
 //    true si le terrain a pu �tre cr�e (l'image a pu �tre charg�e),
 //    false sinon.
 ///////////////////////////////////////////////////////////////////////////////
-bool Terrain::creation(	float dx, float dy, float dz, const char *image_hauteurs )
+bool Terrain::creation(	float dx, float dy, float dz, byte *image_hauteurs )
 {
 	// Tableau de byte servant � stocker les pixels en niveaux de gris de
 	// l'image au format pgm "image_hauteurs".
-	const char *img;
+	byte *img;
 
 	// Chargement d'une image en niveaux de gris. Chaque pixel correspondra
 	// � un point du terrain.
@@ -107,12 +113,17 @@ bool Terrain::creation(	float dx, float dy, float dz, const char *image_hauteurs
 	if( points_terrain )
 		delete[] points_terrain;
 
+	if( liste_indices )
+		delete[] liste_indices;
+
 	points_terrain = new Point_terrain[nb_pt_x * nb_pt_z];
+	liste_indices  = new GLuint[nb_pt_x * nb_pt_z * 2 * 3];
 
 	int x, z, num = 0;
+	GLuint i = 0;
 
+	//Remplissage de la liste des points
 	for( z=0; z<nb_pt_z; z++ )
-	{
 		for( x=0; x<nb_pt_x; x++ )
 		{
 			points_terrain[num].x = x * dist_x;
@@ -121,7 +132,19 @@ bool Terrain::creation(	float dx, float dy, float dz, const char *image_hauteurs
 
 			num++;
 		}
-	}
+
+	num = 0;
+	i   = 0;
+	//Remplissage de la liste des sommets
+	for(z=0; z < nb_pt_z-1; z++)
+		for(x=0; x < nb_pt_x-1; x++)
+		{
+			i = x+z*nb_pt_x;
+			liste_indices[num++] = i;
+			liste_indices[num++] = i + nb_pt_x;
+			liste_indices[num++] = i+1;
+			liste_indices[num++] = i + nb_pt_x + 1;
+		}
 
 	delete[] img;
 

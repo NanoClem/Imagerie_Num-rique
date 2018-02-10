@@ -23,7 +23,7 @@ byte* load_PGM( const char *fname, int *width, int *height )
 	do
 	{
 		c=fgetc(f); if(c=='#') while((c=fgetc(f))!='\n');
-	} 
+	}
 	while(!isdigit(c));
 
 	ungetc(c,f);
@@ -33,7 +33,7 @@ byte* load_PGM( const char *fname, int *width, int *height )
 	do
 	{
 		c=fgetc(f); if(c=='#') while((c=fgetc(f))!='\n');
-	} 
+	}
 	while(!isdigit(c));
 
 	ungetc(c,f);
@@ -43,7 +43,7 @@ byte* load_PGM( const char *fname, int *width, int *height )
 	do
 	{
 		c=fgetc(f); if(c=='#') while((c=fgetc(f))!='\n');
-	} 
+	}
 	while(!isdigit(c));
 
 	ungetc(c,f);
