@@ -20,10 +20,6 @@ int SCREEN_HEIGHT = 600;								// Hauteur de la fen�tre OpenGl
 
 #define KEY_ESC 27										// Code ASCII de la touche Echap
 
-#ifndef byte
-typedef unsigned char byte;
-#endif
-
 
 float	xpos = 0, ypos = 20, zpos = 150;				// Position de la cam�ra
 int		angle_x = 0, angle_y = 0;						// Orientation de la cam�ra

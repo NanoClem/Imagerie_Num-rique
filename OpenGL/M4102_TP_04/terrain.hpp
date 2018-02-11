@@ -15,6 +15,8 @@
 typedef unsigned char byte;
 #endif
 
+#include "Texture.hpp"
+
 
 typedef struct									// D�finition d'un point du terrain
 {
@@ -32,7 +34,10 @@ public :
 	~Terrain();										// Destructeur
 
 	bool creation(	float dx, float dy, float dz,	// Cr�ation du terrain � partir d'une image
-									byte *image_hauteurs );
+									const char *image_hauteurs );
+
+  void charge_texture(const char *filename);
+	void calcule_coords_texture();
 
 	void affiche();									// Affichage du terrain
 
@@ -51,6 +56,7 @@ private:
 	int		nb_pt_x, nb_pt_z;						// Nombre de points en x et en z
 	float	dist_x, dist_z;							// Distance s�parant 2 points selon x et z
 	float   dist_y;									// Coefficient d'agrandissement vertical
+	Texture *texture;
 
 	Point_terrain	*points_terrain;				// Tableau contenant les points du terrain
 	GLuint 				*liste_indices;					// Tableau contenant les indices des sommets

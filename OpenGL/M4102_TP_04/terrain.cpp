@@ -70,11 +70,13 @@ void Terrain::affiche()
 	//         | / |
 	//         1/--2
 	//
-
 	const unsigned int NB_INDICES = nb_pt_x * nb_pt_z * 2 * 3;
 
+	//Calcul des normales de chaque triangle avant l'affichage
+	glNormal3f(points_terrain->nx, points_terrain->ny, points_terrain->nz);
+
 	glInterleavedArrays( GL_T2F_N3F_V3F, 0, points_terrain );
-	glDrawElements( GL_TRIANGLES, NB_INDICES,
+	glDrawElements( GL_TRIANGLE_STRIP, NB_INDICES,
 	 								GL_UNSIGNED_INT, liste_indices );
 }
 
@@ -92,7 +94,7 @@ void Terrain::affiche()
 //    true si le terrain a pu �tre cr�e (l'image a pu �tre charg�e),
 //    false sinon.
 ///////////////////////////////////////////////////////////////////////////////
-bool Terrain::creation(	float dx, float dy, float dz, byte *image_hauteurs )
+bool Terrain::creation(	float dx, float dy, float dz, const char *image_hauteurs )
 {
 	// Tableau de byte servant � stocker les pixels en niveaux de gris de
 	// l'image au format pgm "image_hauteurs".
@@ -154,4 +156,22 @@ bool Terrain::creation(	float dx, float dy, float dz, byte *image_hauteurs )
 	terrain_shininess[0]=1.0f;
 
 	return true;
+}
+
+
+
+//Chargement de la texture du terrain
+void Terrain::charge_texture(const char *filename)
+{
+	texture = new Texture(1, 1024, 1024, 3);
+	texture->load(filename);
+	texture->use();
+}
+
+
+
+//Calcul des coordonnées de la texture
+void Terrain::calcule_coords_texture()
+{
+	
 }
