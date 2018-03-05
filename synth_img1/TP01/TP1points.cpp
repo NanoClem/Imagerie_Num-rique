@@ -27,7 +27,7 @@ static void RenderScene()
 	glBindBuffer(GL_ARRAY_BUFFER, leVBO);
 	glVertexPointer(3, GL_FLOAT, 0, 0); //description des données pointées
 
-	glDrawArrays(GL_POINTS, 0, 8); //9 éléments à utiliser pour le dessin
+	glDrawArrays(GL_POINTS, 0, 9); //9 éléments à utiliser pour le dessin
 
 	glDisableClientState(GL_VERTEX_ARRAY); //plus besoin de vertexArray
 
@@ -53,8 +53,8 @@ void randCoords(float vertices[], int nbVertex)
 //Crée un objet de type Cercle et renvoie les coordonées en 3D des points
 float *createCircle(float CentreX, float CentreY, float rayon)
 {
-	Cercle cercle(CentreX, CentreY, rayon);
-	return cercle.getCoords();
+	Cercle *cercle = new Cercle(CentreX, CentreY, rayon);
+	return cercle->getCoords();
 }
 
 
@@ -65,7 +65,7 @@ static void CreateVertexBuffer()
 	float randVertices[27];			// 9 points à coordonnées aléatoires
 	randCoords(randVertices, 27);	// remplissage du tableau de coords
 
-	// float *circleVertices = createCircle(0, 0, 1);   //Cercle de centre (0,0) et de rayon 1
+	float *circleVertices = createCircle(0, 0, 1);   //Cercle de centre (0,0) et de rayon 1
 
 
 //1er sommet
@@ -116,8 +116,8 @@ static void CreateVertexBuffer()
  	glGenBuffers(1, &leVBO); //génération d'une référence de buffer object
 	glBindBuffer(GL_ARRAY_BUFFER, leVBO); //liaison du buffer avec un type tableau de données
 	//glBufferData(GL_ARRAY_BUFFER, sizeof(float)*24, vertices, GL_STATIC_DRAW); //création et initialisation du container de données (9 sommets -> 27 float)
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*27, randVertices, GL_STATIC_DRAW);
-	// glBufferData(GL_ARRAY_BUFFER, sizeof(float)*27, circleVertices, GL_STATIC_DRAW);
+	// glBufferData(GL_ARRAY_BUFFER, sizeof(float)*27, randVertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float)*27, circleVertices, GL_STATIC_DRAW);
 }
 
 
