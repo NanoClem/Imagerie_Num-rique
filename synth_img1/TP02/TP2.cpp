@@ -103,7 +103,7 @@ static void RenderSceneCameraPerspective()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	glColor3f(1.0, 0.0, 0.0); //couleur générale
+	glColor3f(1.0, 1.0, 0.0); //couleur générale
 
 	//Modification de la matrice de projection
 	glMatrixMode(GL_PROJECTION);

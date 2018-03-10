@@ -1,0 +1,10 @@
+D:/Users/Anthony/Downloads/glew/CMakeFiles/install.dir
+D:/Users/Anthony/Downloads/glew/CMakeFiles/rebuild_cache.dir
+D:/Users/Anthony/Downloads/glew/CMakeFiles/glew.dir
+D:/Users/Anthony/Downloads/glew/CMakeFiles/edit_cache.dir
+D:/Users/Anthony/Downloads/glew/CMakeFiles/glew_s.dir
+D:/Users/Anthony/Downloads/glew/CMakeFiles/glewinfo.dir
+D:/Users/Anthony/Downloads/glew/CMakeFiles/list_install_components.dir
+D:/Users/Anthony/Downloads/glew/CMakeFiles/visualinfo.dir
+D:/Users/Anthony/Downloads/glew/CMakeFiles/install/strip.dir
+D:/Users/Anthony/Downloads/glew/CMakeFiles/install/local.dir
