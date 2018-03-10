@@ -13,7 +13,6 @@ class Astre {
         GLfloat vitesse, distance, angle;
         GLfloat *rgb;
 
-
     public:
 
         Astre(GLdouble _rayon,

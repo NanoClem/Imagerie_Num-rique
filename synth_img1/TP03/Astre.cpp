@@ -39,7 +39,7 @@ void Astre::withSatellite()
       //satellite
       glColor3f(1.0, 1.0, 1.0);
       glRotatef(vitesse*2.0*angle, 0.0, 1.0, 1.0);
-      glTranslatef(1.2, 0.0, 0.0);
+      glTranslatef(2.5, 0.0, 0.0);
       glutSolidSphere(rayon/2, 10.0, 10.0);
   glPopMatrix();
 }

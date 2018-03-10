@@ -65,7 +65,7 @@ static void RenderScene()
 	glLoadIdentity();
 
 	//Définition de la position de l'observateur
-	gluLookAt(5.0, 5.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); //paramètres position(5.0, 5.0, 5.0), point visé(0.0, 0.0, 0.0), upVector - verticale (0.0, 1.0, 0.0)
+	gluLookAt(10.0, 10.0, 10.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); //paramètres position(5.0, 5.0, 5.0), point visé(0.0, 0.0, 0.0), upVector - verticale (0.0, 1.0, 0.0)
 
 	//rotation due aux mouvements de la souris
 	glRotatef(mouseAngleX, 1.0, 0.0, 0.0);
@@ -108,7 +108,7 @@ static void RenderScene()
 	sun_color[0] = 1.0;
 	sun_color[1] = 1.0;
 	sun_color[2] = 0.0;
-	Astre *soleil = new Astre(2.0, 0.5, 0.0, angle, sun_color);
+	Astre *soleil = new Astre(4.0, 1, 0.0, angle, sun_color);
 	soleil->withoutSatellite();
 
 	//MARS
@@ -116,7 +116,7 @@ static void RenderScene()
 	mars_color[0] = 1.0;
 	mars_color[1] = 0.0;
 	mars_color[2] = 0.0;
-	Astre *mars = new Astre(0.5, 2.0, 5.0, angle, mars_color);
+	Astre *mars = new Astre(1.8, 1.0, 18, angle, mars_color);
 	mars->withoutSatellite();
 
 	//TERRE AVEC LA LUNE EN ORBITE
@@ -124,7 +124,7 @@ static void RenderScene()
 	earth_color[0] = 0.0;
 	earth_color[1] = 0.0;
 	earth_color[2] = 1.0;
-	Astre *terre = new Astre(0.7, 3.0, 7.0, angle, earth_color);
+	Astre *terre = new Astre(2.0, 3.0, 10.0, angle, earth_color);
 	terre->withSatellite();
 
 	glutSwapBuffers();
