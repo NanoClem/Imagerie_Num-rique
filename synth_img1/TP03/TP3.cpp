@@ -119,13 +119,25 @@ static void RenderScene()
 	Astre *mars = new Astre(1.8, 1.0, 18, angle, mars_color);
 	mars->withoutSatellite();
 
+
 	//TERRE AVEC LA LUNE EN ORBITE
+
+	//TERRE
 	GLfloat *earth_color = new float[3];
 	earth_color[0] = 0.0;
 	earth_color[1] = 0.0;
 	earth_color[2] = 1.0;
+
+	//LUNE
+	GLfloat *moon_color = new float[3];
+	moon_color[0] = 1.0;
+	moon_color[1] = 1.0;
+	moon_color[2] = 1.0;
+
 	Astre *terre = new Astre(2.0, 3.0, 10.0, angle, earth_color);
-	terre->withSatellite();
+	terre->withSatellite(terre->getRayon()/2,													//On créé la terre en choisissant
+											 terre->getVitesse()*2, 2.5, angle,						//de lui atribuer un satellite en orbite
+										 	 moon_color);
 
 	glutSwapBuffers();
 }

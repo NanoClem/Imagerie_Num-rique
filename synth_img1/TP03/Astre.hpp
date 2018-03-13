@@ -20,8 +20,16 @@ class Astre {
               GLfloat *_rgb);
         ~Astre();
 
-        void withSatellite();
+        void withSatellite(GLdouble satRayon,
+                           GLfloat satVitesse, GLfloat satDistance, GLfloat satAngle,
+                           GLfloat *satRGB);
         void withoutSatellite();
+
+        inline GLdouble getRayon()    {return rayon;}
+        inline GLfloat getVitesse()   {return vitesse;}
+        inline GLfloat getDistance()  {return distance;}
+        inline GLfloat getAngle()     {return angle;}
+        inline GLfloat *getRGB()      {return rgb;}
 };
 
 #endif
